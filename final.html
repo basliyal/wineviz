@@ -24,7 +24,7 @@ var svg = d3.select("#container")
           "translate(" + margin.left + "," + margin.top + ")");
 
 
-d3.csv("http://127.0.0.1:3000/winemag-data_first150k.csv", function(data){
+d3.csv("http://127.0.0.1/winemag-data_first150k.csv", function(data){
   // X axis: scale and draw:
 var x = d3.scaleLinear()
     .domain([70, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
