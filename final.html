@@ -2,102 +2,37 @@
 <head>
   <meta charset="utf-8">
   <title></title>
+  <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 <body>
   <div id="pageheader">
-    <h1> Pankaj</h1>
+    <h1> Wine Rating Sytem</h1>
   </div>
+  <p>A wine rating system is a numeric value on a scale of 100 points provided to
+     a wine by set of critics. The method is considered <br>flawed by many since it
+     doesn't hold any scientific measuement and dependent of individual critics
+     choices and there tastes. <br>However, The 100 point system is unified worldwide
+     used and has become a goto method for people to decide on wine tasting <br>and buying. </p>
+
+<p> This visualization will help us understand how the Wine rating system works for
+  different wines and how different region <br>fairs in the rating system. </p>
+
+  <p>The 100 points scale actually starts at 50 and describe each range as below: </p>
+
+  <ul class="list" style="margin-left:20px;">
+<li><strong>50-59</strong> wines are flawed and undrinkable</li>
+<li><strong>60-69</strong> wines are flawed and not recommended but drinkable</li>
+<li><strong>70-79</strong> wines are flawed and taste average</li>
+<li><strong>80-84</strong> wines are ‘above average’ to ‘good’</li>
+<li><strong>85-90</strong> wines are ‘good’ to ‘very good’ </li>
+<li><strong>90-94</strong> wines are ‘superior’ to ‘exceptional’ </li>
+<li><strong>95-100</strong> wines are benchmark examples or ‘classic’ </li>
+</ul>
+
+  <button id="next">Next Page</button>
   <div id="container"></div>
 </body>
 <script src="https://d3js.org/d3.v4.js"></script>
-<script>
-var margin = {top: 10, right: 30, bottom: 30, left: 70},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+<script src="winerate.js"></script>
 
-var svg = d3.select("#container")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
-
-
-d3.csv("http://127.0.0.1/winemag-data_first150k.csv", function(data){
-  // X axis: scale and draw:
-var x = d3.scaleLinear()
-    .domain([70, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
-    .range([0, width]);
-
-svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));
-
-    // text label for the x axis
-    svg.append("text")
-        .attr("transform",
-              "translate(" + (width/2) + " ," +
-                             (height + margin.top + 20) + ")")
-        .style("text-anchor", "middle")
-        .text("Wine Points");
-
-// set the parameters for the histogram
-var histogram = d3.histogram()
-    .value(function(d) { return d.points; })
-    .domain(x.domain())
-    .thresholds(x.ticks(42));
-var bins = histogram(data);
-
-// Y axis: scale and draw:
-var y = d3.scaleLinear()
-    .range([height, 0]);
-    y.domain([0, d3.max(bins, function(d) { return d.length; })]);
-svg.append("g")
-    .call(d3.axisLeft(y));
-
-    // text label for the y axis
-    svg.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left)
-        .attr("x",0 - (height / 2))
-        .attr("dy", "1em")
-        .style("text-anchor", "middle")
-        .style("font-size", "18px")
-        .text("# of Wines");
-
-svg.selectAll("rect")
-    .data(bins)
-    .enter()
-    .append("rect")
-      .attr("x", 1)
-      .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
-      .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
-      .attr("height", function(d) { return height - y(d.length); })
-      .style("fill", function(d){ if(d.x0<87){return "orange"} else {return "teal"}});
-
-svg.append("line")
-    .attr("x1", x(10) )
-    .attr("x2", x(10) )
-    .attr("y1", y(0))
-    .attr("y2", y(30000))
-    .attr("stroke", "grey")
-    .attr("stroke-dasharray", "4")
-
-svg.append("text")
-  .attr("x", x(10))
-  .attr("y", y(15000))
-  .text("Threshold: 6.5 Quality rating")
-  .style("font-size", "15px")
-
-  svg.append("text")
-          .attr("x", (width - 20))
-          .attr("y", 10 - (margin.top / 2))
-          .attr("text-anchor", "middle")
-          .style("font-size", "18px")
-          .text("Wine Points");
-});
-
-
-</script>
 </html>

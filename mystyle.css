@@ -1,0 +1,29 @@
+body {
+  background-image: url("pics/468014.jpg");
+  background-size:cover;
+  background-color: #cccccc;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 21px;
+  letter-spacing: 0.6px;
+  word-spacing: -1px;
+  color: #998024;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: none;
+}
+
+#container{
+  fill: #277D6E;
+
+}
+h1 {
+    color: coral;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
