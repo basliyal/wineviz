@@ -1,31 +1,11 @@
 // first promise returns the dataset
-const dataset = d3.csv("https://raw.githubusercontent.com/basliyal/wineviz/master/winemag-data_first150k.csv")
-.then(function(data){
-  return data;
-});
-//this promise returns an array with lattitude and longitude
-const values = dataset.then(function(value) {
-  return Promise.all(value.map(function(results){
-    return [results.points, results.price];
-}))});
-  //print the array
-values.then(function(value) {
-  drawChart("#ratingcurve",value.map(function(results){
-    return parseInt(results[0]);
-  }), 88, "Wine Rating Curve", "Wine Points")});
-
-values.then(function(value) {
-    drawChart("#pricecurve",value.map(function(results){
-      return parseInt(results[1]);
-    }), 40, "Wine Price chart", "Price per bottle")});
-
-
 function drawChart(dom, data,thresold, main, xax) {
   // set the dimensions and margins of the graph
   var margin = {top: 30, right: 50, bottom: 70, left: 70},
       width = 500 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
 
+  console.log(data);
 
 
     var data=data.filter((d)=>{return !isNaN(d)})
