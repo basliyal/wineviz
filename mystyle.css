@@ -3,7 +3,7 @@ body {
   background-size:cover;
   background-color: #cccccc;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
-  font-size: 18px;
+  font-size: 13px;
   letter-spacing: 0.6px;
   word-spacing: -1px;
   color: #998024;
@@ -15,14 +15,18 @@ body {
 
 #ratingcurve{
   fill: #277D6E;
-
 }
+
+#pricecurve{
+  fill: #277D6E;
+}
+
 h1 {
     color: coral;
 }
-
-.line {
+.axis path,
+.axis line {
   fill: none;
-  stroke: steelblue;
-  stroke-width: 2px;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
