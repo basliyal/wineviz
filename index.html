@@ -1,0 +1,46 @@
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+  <div id="pageheader">
+    <h1> Wine Rating & Pricing</h1>
+  </div>
+  <div id = "introduction">
+  <p>A wine rating system is a numeric value on a scale of 100 points provided to
+    a wine by set of critics. The method is considered <br>flawed by many since it
+    doesn't hold any scientific measuement and dependent of individual critics
+    choices and their taste prefernces. <br>However, The 100 point system is unified worldwide
+    used and has become a goto method for people to decide on wine tasting <br>and buying. </p>
+
+    <p> This visualization will help us understand how the Wine rating system works for
+      different wines and how different region <br>fairs in the rating system. </p>
+
+      <p>The 100 points scale actually starts at 50 and describe each range as below: </p>
+
+      <ul class="list" style="margin-left:20px;">
+        <li><strong>under-79</strong> wines are flawed and taste average</li>
+        <li><strong>80-84</strong> wines are ‘above average’ to ‘good’</li>
+        <li><strong>85-90</strong> wines are ‘good’ to ‘very good’ </li>
+        <li><strong>90-94</strong> wines are ‘superior’ to ‘exceptional’ </li>
+        <li><strong>95-100</strong> wines are benchmark examples or ‘classic’ </li>
+      </ul>
+      <br/>
+    </div>
+
+    <div style="width: 500px; float: left;" id="ratingcurve"> </div>
+    <div style="margin-left: 510px;" id="pricecurve">  </div>
+  </br>
+<div>
+  in Above graphs we can see while Wine Quality follows a normal distribution wine prices decline sharply.
+  we will focus on global quality distribution and wine price distribution in coming slides.
+</div>
+</br>
+
+<button>Learn More</button>
+  </body>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="winerate.js"></script>
+  </html>
