@@ -9,38 +9,63 @@
     <h1> Wine Rating & Pricing</h1>
   </div>
   <div id = "introduction">
-  <p>A wine rating system is a numeric value on a scale of 100 points provided to
-    a wine by set of critics. The method is considered <br>flawed by many since it
-    doesn't hold any scientific measuement and dependent of individual critics
-    choices and their taste prefernces. <br>However, The 100 point system is unified worldwide
-    used and has become a goto method for people to decide on wine tasting <br>and buying. </p>
+    <p>A wine rating system is a numeric value on a scale of 100 points provided to
+      a wine by set of critics. The method is considered <br>flawed by many since it
+      doesn't hold any scientific measuement and dependent of individual critics
+      choices and their taste prefernces. <br>However, The 100 point system is unified worldwide
+      used and has become a goto method for people to decide on wine tasting <br>and buying. </p>
 
-    <p> This visualization will help us understand how the Wine rating system works for
-      different wines and how different region <br>fairs in the rating system. </p>
+      <p> This visualization will help us understand how the Wine rating system works for
+        different wines and how different region <br>fairs in the rating system. </p>
 
-      <p>The 100 points scale actually starts at 50 and describe each range as below: </p>
+        <p>The 100 points scale actually starts at 50 and describe each range as below: </p>
 
-      <ul class="list" style="margin-left:20px;">
-        <li><strong>under-79</strong> wines are flawed and taste average</li>
-        <li><strong>80-84</strong> wines are ‘above average’ to ‘good’</li>
-        <li><strong>85-90</strong> wines are ‘good’ to ‘very good’ </li>
-        <li><strong>90-94</strong> wines are ‘superior’ to ‘exceptional’ </li>
-        <li><strong>95-100</strong> wines are benchmark examples or ‘classic’ </li>
-      </ul>
-      <br/>
+        <ul class="list" style="margin-left:20px;">
+          <li><strong>under-79</strong> wines are flawed and taste average</li>
+          <li><strong>80-84</strong> wines are ‘above average’ to ‘good’</li>
+          <li><strong>85-90</strong> wines are ‘good’ to ‘very good’ </li>
+          <li><strong>90-94</strong> wines are ‘superior’ to ‘exceptional’ </li>
+          <li><strong>95-100</strong> wines are benchmark examples or ‘classic’ </li>
+        </ul>
+        <br/>
+      </div>
+
+      <div style="width: 500px; float: left;" id="ratingcurve"> </div>
+      <div style="margin-left: 510px;" id="pricecurve">  </div>
+    </br>
+    <div>
+      in Above graphs we can see while Wine Quality follows a normal distribution wine prices decline sharply.
+      we will focus on global quality distribution and wine price distribution in coming slides.
     </div>
-
-    <div style="width: 500px; float: left;" id="ratingcurve"> </div>
-    <div style="margin-left: 510px;" id="pricecurve">  </div>
   </br>
-<div>
-  in Above graphs we can see while Wine Quality follows a normal distribution wine prices decline sharply.
-  we will focus on global quality distribution and wine price distribution in coming slides.
-</div>
-</br>
+  <a href="countrycheck.html" class="button">Learn More</a>
+</body>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="winerate.js"></script>
+<script>
+// first promise returns the dataset
+const dataset = d3.csv("https://raw.githubusercontent.com/basliyal/wineviz/master/winemag-data_first150k.csv")
+.then(function(data){
+  return data;
+});
+//this promise returns an array with lattitude and longitude
+const values = dataset.then(function(value) {
+  return Promise.all(value.map(function(results){
+    return [results.points, results.price];
+  }))});
+  //print the array
+  values.then(function(value) {
+    window.localStorage.setItem('value', JSON.stringify(value));
+  });
 
-<button>Learn More</button>
-  </body>
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="winerate.js"></script>
-  </html>
+  var val = JSON.parse(window.localStorage.getItem('value'));
+
+  drawChart("#ratingcurve",val.map(function(d){ return parseInt(d[0]); }),
+  88, "Wine Rating Curve", "Wine Points");
+
+  drawChart("#pricecurve",val.map(function(d){ return parseInt(d[1]); }),
+  40, "Wine Price chart", "Price per bottle");
+
+
+</script>
+</html>

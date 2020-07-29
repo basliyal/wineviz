@@ -1,0 +1,28 @@
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+
+    <div style="width: 500px; float: left;" id="ratingcurve">     <h1> Best Wines comes from</h1> </div>
+    <div style="margin-left: 510px;" id="pricecurve">     <h1>Costliest Wies from</h1> </div>
+
+</br>
+<a href="index.html" class="backbutton">Go Back</a>
+<a href="worldview.html" class="button">Learn More</a>
+
+  </body>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="winerate.js"></script>
+  <script>
+  var val = JSON.parse(window.localStorage.getItem('value'));
+
+  drawChart("#ratingcurve",val.map(function(d){ return parseInt(d[0]); }),
+  88, "Wine Rating Curve", "Wine Points");
+
+  drawChart("#pricecurve",val.map(function(d){ return parseInt(d[1]); }),
+  40, "Wine Price chart", "Price per bottle");
+</script>
+  </html>
