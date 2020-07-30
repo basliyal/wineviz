@@ -21,6 +21,20 @@ body {
   fill: #277D6E;
 }
 
+
+#total{
+  fill: #277D6E;
+}
+
+#avgquality{
+  fill: #277D6E;
+}
+
+#avgprice{
+  fill: #277D6E;
+}
+
+
 h1 {
     color: coral;
 }

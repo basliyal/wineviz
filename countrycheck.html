@@ -5,9 +5,10 @@
   <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 <body>
+<div  id="total"></div>
+<div  id="avgquality"></div>
+<div  id="avgprice"></div>
 
-    <div style="width: 500px; float: left;" id="ratingcurve">     <h1> Best Wines comes from</h1> </div>
-    <div style="margin-left: 510px;" id="pricecurve">     <h1>Costliest Wies from</h1> </div>
 
 </br>
 <a href="index.html" class="backbutton">Go Back</a>
@@ -15,14 +16,39 @@
 
   </body>
   <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="winerate.js"></script>
+  <script src="countrycheck.js"></script>
   <script>
   var val = JSON.parse(window.localStorage.getItem('value'));
+  var aggdata = d3.nest()
+  .key(function(d) { return d[2]; })
+  .rollup(function(v) { return v.length })
+  .entries(val)
+  .sort(function(a,b) {return d3.descending(a.value,b.value);})
 
-  drawChart("#ratingcurve",val.map(function(d){ return parseInt(d[0]); }),
-  88, "Wine Rating Curve", "Wine Points");
+  var qualityavg = d3.nest()
+  .key(function(d) { return d[2]; })
+  .rollup(function(v) {
+    var count = v.length;
+    var total = d3.sum(v, function(d) { return d[0] })
+    return total/count;
+  })
+  .entries(val)
+  .sort(function(a,b) {return d3.descending(a.value,b.value);})
 
-  drawChart("#pricecurve",val.map(function(d){ return parseInt(d[1]); }),
-  40, "Wine Price chart", "Price per bottle");
+  var priceavg = d3.nest()
+  .key(function(d) { return d[2]; })
+  .rollup(function(v) {
+    var count = v.length;
+    var total = d3.sum(v, function(d) { return d[1] })
+    return total/count;
+  })
+  .entries(val)
+  .sort(function(a,b) {return d3.descending(a.value,b.value);})
+
+
+  drawChart("#total",aggdata, "Total Rating Counts by countries", "Total",  "#69b3a2");
+  drawChart("#avgquality",qualityavg,"Avg Wine Quality by Countries", "Avg Quality Rating" , "#CC9900" );
+  drawChart("#avgprice",priceavg, "Avg wine Price by Countries", "Avg Price", "#883300");
+
 </script>
   </html>

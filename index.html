@@ -50,8 +50,8 @@ const dataset = d3.csv("https://raw.githubusercontent.com/basliyal/wineviz/maste
 });
 //this promise returns an array with lattitude and longitude
 const values = dataset.then(function(value) {
-  return Promise.all(value.map(function(results){
-    return [results.points, results.price];
+  return Promise.all(value.map(function(d){
+    return [d.points, d.price,d.country];
   }))});
   //print the array
   values.then(function(value) {
