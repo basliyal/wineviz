@@ -76,7 +76,6 @@ function drawChart(dom, data, main, xax) {
   .attr("width", function(d) { return x(d.x1) - x(d.x0) ; })
   .style("fill", function(d){ if(d.x0<thresold){return "#404080"} else {return "#69b3a2"}})
   .attr("y",  function(d) {return y(0) - y(d.length)} )
-
   .transition()
   .duration(800)
   .attr("y",  0 )
