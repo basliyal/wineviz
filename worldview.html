@@ -6,21 +6,29 @@
 </head>
 <body>
 </div>
-  <span>Select the report type?</span>
+<div id ="radio" >
+  <span> <b>Select the report type? </b></span>
+  <br>
+  <br>
   <label for="total">
-      <input type="radio" id="total" name="reportType" onclick="drawtotal()" />
+      <input type="radio" id="total" name="reportType" onclick="drawtotal()"/>
       Total Counts by Country
   </label>
+
   <label for="avgprice">
       <input type="radio" id="avgprice" name="reportType" onclick="drawprice()" />
       Avg Wine Price by Country
   </label>
+
   <label for="avgquality">
       <input type="radio" id="avgquality" name="reportType" onclick="drawquality()" />
       Avg Wine Quality by Country
   </label>
-
-  <div  id="winemap"> </div>
+  <br>
+  <br>
+</div>
+<div  id="legend"> </div>
+<div  id="winemap"> </div>
 
 </br>
 <a href="countrycheck.html" class="backbutton">Go Back</a>

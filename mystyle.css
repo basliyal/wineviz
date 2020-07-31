@@ -13,6 +13,18 @@ body {
   text-transform: none;
 }
 
+#radio{
+
+  font-size: 18px;
+  letter-spacing: 0.6px;
+  word-spacing: -1px;
+  color: #998024;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  text-transform: none;
+
+}
 #ratingcurve{
   fill: #277D6E;
 }
@@ -49,6 +61,7 @@ h1 {
 path {
   stroke: black;
   stroke-width: 0.25px;
+  fill : "lightyellow"
 }
 
 .hidden {

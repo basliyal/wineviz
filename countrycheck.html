@@ -5,28 +5,29 @@
   <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 <body>
-<div id ="intro" >  Below we can display three different category of data.
-  <ui>
-    <li>First type of report is Total  number of records we have for each country. This present<li>
-      <li>First type of report is Total  number of records we have for each country. This present<li>
-        <li>First type of report is Total  number of records we have for each country. This present<li>
-</ui>
-
-</div>
-  <span>Select the report type?</span>
+<div id ="radio" >
+  <span> <b>Select the report type? </b></span>
+  <br>
+  <br>
   <label for="total">
-      <input type="radio" id="total" name="reportType" onclick="drawtotal()" />
+      <input type="radio" id="total" name="reportType" onclick="drawtotal()"/>
       Total Counts by Country
   </label>
+  <br>
+  <br>
   <label for="avgprice">
       <input type="radio" id="avgprice" name="reportType" onclick="drawprice()" />
       Avg Wine Price by Country
   </label>
+  <br>
+  <br>
   <label for="avgquality">
       <input type="radio" id="avgquality" name="reportType" onclick="drawquality()" />
       Avg Wine Quality by Country
   </label>
-
+  <br>
+  <br>
+</div>
   <div  id="graph"> </div>
 
 </br>

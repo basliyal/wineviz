@@ -1,6 +1,6 @@
 var margin = {top: 30, right: 50, bottom: 70, left: 70},
 width = 1100 - margin.left - margin.right,
-height = 700 - margin.top - margin.bottom;
+height = 550 - margin.top - margin.bottom;
 
 var formatInteger = d3.format(",");
 var formatDecimal = d3.format(",.2f");
@@ -74,10 +74,12 @@ function drawChart(data, main, left, fill) {
   .attr("transform", "translate(-10,0)rotate(-45)")
   .style("text-anchor", "end");
 
+  var smallest = (d3.min(data, function(d) {return d.value || Infinity; }) -1)
+
 
   // Add Y axis
   var y = d3.scaleLinear()
-  .domain([d3.min(data, function(d) { return d.value;}), d3.max(data, function(d) { return d.value;})])
+  .domain([smallest, d3.max(data, function(d) { return d.value;})])
   .range([ height, 0]);
   svg.append("g")
   .call(d3.axisLeft(y));
@@ -98,12 +100,15 @@ function drawChart(data, main, left, fill) {
   .append("rect")
   .attr("x", function(d) { return x(d.key); })
   .attr("width", x.bandwidth())
-  .attr("y", y(0))
+  .attr("y", y(smallest))
   .attr("height",0)
   .transition()
   .duration(800)
   .attr("y", function(d) { return y(d.value); })
-  .attr("height", function(d) { return height - y(d.value); })
+  .attr("height", function(d) {
+    return (height - y(d.value)) < 0 ? 0 : (height - y(d.value));
+    return value;
+ })
   .delay(function(d,i){return(i*80)})
   .attr("fill", fill);
 
