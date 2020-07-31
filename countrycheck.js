@@ -1,6 +1,6 @@
 var margin = {top: 30, right: 50, bottom: 70, left: 70},
-width = 1000 - margin.left - margin.right,
-height = 250 - margin.top - margin.bottom;
+width = 1100 - margin.left - margin.right,
+height = 700 - margin.top - margin.bottom;
 
 var formatInteger = d3.format(",");
 var formatDecimal = d3.format(",.2f");
@@ -8,11 +8,53 @@ var formatDecimal = d3.format(",.2f");
 function format(number){
 return !(number % 1) ? formatInteger(number) : formatDecimal(number)
 }
+var val = JSON.parse(window.localStorage.getItem('value'));
 
 
-function drawChart(dom, data, main, left, fill) {
+function drawtotal(){
+var aggdata = d3.nest()
+.key(function(d) { return d[2]; })
+.rollup(function(v) { return v.length })
+.entries(val)
+.sort(function(a,b) {return d3.descending(a.value,b.value);})
+drawChart(aggdata, "Total Rating Counts by Country", "Total",  "#69b3a2");
+}
 
-  var svg = d3.select(dom)
+
+
+function drawquality(){
+var qualityavg = d3.nest()
+.key(function(d) { return d[2]; })
+.rollup(function(v) {
+  var count = v.length;
+  var total = d3.sum(v, function(d) { return d[0] })
+  return total/count;
+})
+.entries(val)
+.sort(function(a,b) {return d3.descending(a.value,b.value);})
+drawChart(qualityavg,"Avg Wine Quality by Country", "Avg Quality Rating" , "#CC9900" );
+
+}
+
+function drawprice(){
+var priceavg = d3.nest()
+.key(function(d) { return d[2]; })
+.rollup(function(v) {
+  var count = v.length;
+  var total = d3.sum(v, function(d) { return d[1] })
+  return total/count;
+})
+.entries(val)
+.sort(function(a,b) {return d3.descending(a.value,b.value);})
+drawChart(priceavg, "Avg wine Price by Country", "Avg Price", "#883300");
+}
+
+
+function drawChart(data, main, left, fill) {
+  d3.select("#graph").select("svg").remove();
+  d3.select("#intro").remove();
+
+  var svg = d3.select("#graph")
   .append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
@@ -92,7 +134,7 @@ function drawChart(dom, data, main, left, fill) {
 
       // Prep the tooltip bits, initial display is hidden
 
-      var tooltip =  d3.select(dom)
+      var tooltip =  d3.select("#graph")
       .append("div")
       .attr("class", "tooltip")
     }

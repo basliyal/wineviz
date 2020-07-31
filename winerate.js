@@ -75,14 +75,15 @@ function drawChart(dom, data, main, xax) {
   .attr("x", 0)
   .attr("width", function(d) { return x(d.x1) - x(d.x0) ; })
   .style("fill", function(d){ if(d.x0<thresold){return "#404080"} else {return "#69b3a2"}})
+  .attr("y",  function(d) {return y(0) - y(d.length)} )
 
-  .attr("y", y(0)/2)
-  .attr("height",0 -y(0))
   .transition()
   .duration(800)
-  .attr("y", function(d) { return y(0) - height })
+  .attr("y",  0 )
   .attr("height", function(d) { return height - y(d.length); })
-  .delay(function(d,i){return(i*100)})
+  .delay(function(d,i){return(i*80)})
+
+
 
   svg.append("text")
   .append('svg:tspan')
