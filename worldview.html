@@ -5,9 +5,22 @@
   <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 <body>
+</div>
+  <span>Select the report type?</span>
+  <label for="total">
+      <input type="radio" id="total" name="reportType" onclick="drawtotal()" />
+      Total Counts by Country
+  </label>
+  <label for="avgprice">
+      <input type="radio" id="avgprice" name="reportType" onclick="drawprice()" />
+      Avg Wine Price by Country
+  </label>
+  <label for="avgquality">
+      <input type="radio" id="avgquality" name="reportType" onclick="drawquality()" />
+      Avg Wine Quality by Country
+  </label>
 
-  <div> <br> <br> <br> Below  World map shows the Win stats around the world. <br> <br> <br></div>
-  <div id="winemap"></div>
+  <div  id="winemap"> </div>
 
 </br>
 <a href="countrycheck.html" class="backbutton">Go Back</a>
@@ -19,36 +32,5 @@
 <script src="https://d3js.org/topojson.v0.min.js"></script>
 
 <script src="worldmap.js"></script>
-<script>
 
-var val = JSON.parse(window.localStorage.getItem('value'));
-var aggdata = d3.nest()
-.key(function(d) { return d[2]; })
-.rollup(function(v) { return v.length })
-.entries(val)
-.sort(function(a,b) {return d3.descending(a.value,b.value);})
-
-var qualityavg = d3.nest()
-.key(function(d) { return d[2]; })
-.rollup(function(v) {
-  var count = v.length;
-  var total = d3.sum(v, function(d) { return d[0] })
-  return total/count;
-})
-.entries(val)
-.sort(function(a,b) {return d3.descending(a.value,b.value);})
-
-var priceavg = d3.nest()
-.key(function(d) { return d[2]; })
-.rollup(function(v) {
-  var count = v.length;
-  var total = d3.sum(v, function(d) { return d[1] })
-  return total/count;
-})
-.entries(val)
-.sort(function(a,b) {return d3.descending(a.value,b.value);})
-
-
-drawChart(aggdata, "Total Rating Counts by Country");
-</script>
 </html>
