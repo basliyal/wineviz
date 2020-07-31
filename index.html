@@ -32,13 +32,19 @@
 
       <div style="width: 500px; float: left;" id="ratingcurve"> </div>
       <div style="margin-left: 510px;" id="pricecurve">  </div>
-    </br>
-    <div>
-      in Above graphs we can see while Wine Quality follows a normal distribution wine prices decline sharply.
-      we will focus on global quality distribution and wine price distribution in coming slides.
-    </div>
-  </br>
+    <br>
   <a href="countrycheck.html" class="button">Learn More</a>
+  <br>
+  <div>
+    <br>
+    in Above graphs we can see while Wine Quality follows a normal distribution wine prices graphs decline
+    sharply towards higher price. This indicates while <b>most wines are avg in quality </b> and have
+       equal distribution for higher and lower quality of wines.
+       Whereas, price-wise <b> most wines are cheaper <b> and we find low number of wines in higher price range.
+
+
+    in Next slides, we will focus on global quality distribution and wine price distributions.
+  </div>
 </body>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="winerate.js"></script>
@@ -61,10 +67,10 @@ const values = dataset.then(function(value) {
   var val = JSON.parse(window.localStorage.getItem('value'));
 
   drawChart("#ratingcurve",val.map(function(d){ return parseInt(d[0]); }),
-  88, "Wine Rating Curve", "Wine Points");
+  "Wine Rating Curve", "Wine Points");
 
   drawChart("#pricecurve",val.map(function(d){ return parseInt(d[1]); }),
-  40, "Wine Price chart", "Price per bottle");
+  "Wine Price chart", "Price per bottle");
 
 
 </script>

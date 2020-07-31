@@ -5,50 +5,52 @@
   <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 <body>
-<div  id="total"></div>
-<div  id="avgquality"></div>
-<div  id="avgprice"></div>
+  <div  id="total"></div>
+  <div  id="avgquality"></div>
+  <div  id="avgprice"></div>
 
 
 </br>
 <a href="index.html" class="backbutton">Go Back</a>
 <a href="worldview.html" class="button">Learn More</a>
 
-  </body>
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="countrycheck.js"></script>
-  <script>
-  var val = JSON.parse(window.localStorage.getItem('value'));
-  var aggdata = d3.nest()
-  .key(function(d) { return d[2]; })
-  .rollup(function(v) { return v.length })
-  .entries(val)
-  .sort(function(a,b) {return d3.descending(a.value,b.value);})
+</body>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="countrycheck.js"></script>
 
-  var qualityavg = d3.nest()
-  .key(function(d) { return d[2]; })
-  .rollup(function(v) {
-    var count = v.length;
-    var total = d3.sum(v, function(d) { return d[0] })
-    return total/count;
-  })
-  .entries(val)
-  .sort(function(a,b) {return d3.descending(a.value,b.value);})
+<script>
+var val = JSON.parse(window.localStorage.getItem('value'));
+var aggdata = d3.nest()
+.key(function(d) { return d[2]; })
+.rollup(function(v) { return v.length })
+.entries(val)
+.sort(function(a,b) {return d3.descending(a.value,b.value);})
 
-  var priceavg = d3.nest()
-  .key(function(d) { return d[2]; })
-  .rollup(function(v) {
-    var count = v.length;
-    var total = d3.sum(v, function(d) { return d[1] })
-    return total/count;
-  })
-  .entries(val)
-  .sort(function(a,b) {return d3.descending(a.value,b.value);})
+var qualityavg = d3.nest()
+.key(function(d) { return d[2]; })
+.rollup(function(v) {
+  var count = v.length;
+  var total = d3.sum(v, function(d) { return d[0] })
+  return total/count;
+})
+.entries(val)
+.sort(function(a,b) {return d3.descending(a.value,b.value);})
+
+var priceavg = d3.nest()
+.key(function(d) { return d[2]; })
+.rollup(function(v) {
+  var count = v.length;
+  var total = d3.sum(v, function(d) { return d[1] })
+  return total/count;
+})
+.entries(val)
+.sort(function(a,b) {return d3.descending(a.value,b.value);})
 
 
-  drawChart("#total",aggdata, "Total Rating Counts by countries", "Total",  "#69b3a2");
-  drawChart("#avgquality",qualityavg,"Avg Wine Quality by Countries", "Avg Quality Rating" , "#CC9900" );
-  drawChart("#avgprice",priceavg, "Avg wine Price by Countries", "Avg Price", "#883300");
+drawChart("#total",aggdata, "Total Rating Counts by Country", "Total",  "#69b3a2");
+drawChart("#avgquality",qualityavg,"Avg Wine Quality by Country", "Avg Quality Rating" , "#CC9900" );
+drawChart("#avgprice",priceavg, "Avg wine Price by Country", "Avg Price", "#883300");
 
 </script>
-  </html>
+
+</html>

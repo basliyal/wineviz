@@ -1,8 +1,16 @@
+var margin = {top: 30, right: 50, bottom: 70, left: 70},
+width = 1000 - margin.left - margin.right,
+height = 250 - margin.top - margin.bottom;
+
+var formatInteger = d3.format(",");
+var formatDecimal = d3.format(",.2f");
+
+function format(number){
+return !(number % 1) ? formatInteger(number) : formatDecimal(number)
+}
+
 
 function drawChart(dom, data, main, left, fill) {
-  var margin = {top: 30, right: 50, bottom: 70, left: 70},
-  width = 1000 - margin.left - margin.right,
-  height = 250 - margin.top - margin.bottom;
 
   var svg = d3.select(dom)
   .append("svg")
@@ -23,6 +31,7 @@ function drawChart(dom, data, main, left, fill) {
   .selectAll("text")
   .attr("transform", "translate(-10,0)rotate(-45)")
   .style("text-anchor", "end");
+
 
   // Add Y axis
   var y = d3.scaleLinear()
@@ -46,9 +55,14 @@ function drawChart(dom, data, main, left, fill) {
   .enter()
   .append("rect")
   .attr("x", function(d) { return x(d.key); })
-  .attr("y", function(d) { return y(d.value); })
   .attr("width", x.bandwidth())
+  .attr("y", y(0))
+  .attr("height",0)
+  .transition()
+  .duration(800)
+  .attr("y", function(d) { return y(d.value); })
   .attr("height", function(d) { return height - y(d.value); })
+  .delay(function(d,i){return(i*80)})
   .attr("fill", fill);
 
   svg.append("text")
@@ -57,4 +71,28 @@ function drawChart(dom, data, main, left, fill) {
   .style("font-size", "18px")
   .html(main);
 
-}
+  svg.selectAll("rect")
+
+  .on("mouseover", function() {
+    tooltip.style("visibility", "visible")
+    tooltip.style("opacity", 1)
+    d3.select(this).style("fill", "red");})
+
+
+    .on("mouseout", function() {
+      tooltip.style("visibility", "hidden")
+      tooltip.style("opacity", 0)
+      d3.select(this).style("fill", fill); })
+
+      .on("mousemove", function(d) {
+        tooltip.html("<p>" + "Avg. Value: " + format(d.value) + "<br>" + "Country" +": " + d.key)
+        tooltip.style("left", (event.pageX) + "px")
+        tooltip.style("top", (event.pageY) + "px")
+      });
+
+      // Prep the tooltip bits, initial display is hidden
+
+      var tooltip =  d3.select(dom)
+      .append("div")
+      .attr("class", "tooltip")
+    }
