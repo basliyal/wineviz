@@ -1,0 +1,44 @@
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+
+<body>
+<select id='countryList' onchange="scheduleA.call(this, event)">
+  <option> Select a Country</option>
+</select>
+
+<div id ="plot" class="plot" > </div>
+<a href="worldview.html" class="backbutton">Go Back</a>
+<a href="index.html" class="button">Start Over</a>
+</body>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="scatterplot.js"></script>
+<script>
+var val = JSON.parse(window.localStorage.getItem('value'));
+
+var countryItems = document.getElementById("countryList");
+
+var countryList = val.map(function(d){ return d[2]}).filter( function(value, index, self) {
+    return self.indexOf(value) === index; }).sort();
+
+for (var i = 0; i < countryList.length; i++) {
+      var opt = countryList[i];
+      var el = document.createElement("option");
+      el.textContent = opt;
+      el.value = opt;
+      countryItems.appendChild(el);
+    }
+drawChart(val);
+
+</script>
+
+<div class="citation">
+<img src="" alt="Background image courtesy: https://www.bayridgewine.com/wp-content/uploads/2018/03/white-wine-white-background.jpg" />
+<p>- photo by: https://www.bayridgewine.com/ , Bay Ridge Wine & Spirits, Annapolis</p>
+<p>- data courtesy to: https://www.kaggle.com/zynicide/wine-reviews , Kaggle datasoruce</p>
+
+</div>
+</html>
