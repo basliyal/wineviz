@@ -20,7 +20,6 @@ function scheduleA(event) {
 
 function drawChart(data) {
   d3.select("#plot").select("svg").remove();
-
   var svg = d3.select("#plot")
   .append("svg")
   .attr("width", width + margin.left + margin.right)
@@ -54,7 +53,7 @@ console.log ("x")
   .text("Wine Quality");
 
 
-  var smallest = (d3.min(ydata, function(d) {return d || Infinity; }) -1)
+var smallest = d3.min(ydata, function(d) {return d || 0});
 
 
   // Add Y axis
