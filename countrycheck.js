@@ -109,7 +109,7 @@ function drawChart(data, main, left, fill) {
     return (height - y(d.value)) < 0 ? 0 : (height - y(d.value));
     return value;
  })
-  .delay(function(d,i){return(i*80)})
+  .delay(function(d,i){return(i*50)})
   .attr("fill", fill);
 
   svg.append("text")

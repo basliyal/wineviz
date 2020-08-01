@@ -1,5 +1,9 @@
 var width = 1200,
-height = 700;
+height = 600;
+
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
+}
 
 var formatInteger = d3.format(",");
 var formatDecimal = d3.format(",.2f");
@@ -64,13 +68,15 @@ function drawChart(data, title, xval){
   d3.select("#winemap").select("svg").remove();
 
   var projection = d3.geoMercator()
-  .center([10, 50]) //long and lat starting position
-  .scale(200) //starting zoom position
-  .rotate([15,0]); //where world split occurs
+  .center([10, 50])
+  .scale(130)
+  .rotate([15,0])
+  .translate([width / 2, height / 2]);
 
   var svg = d3.select("#winemap").append("svg")
   .attr("width", width)
   .attr("height", height);
+
 
   var path = d3.geoPath()
   .projection(projection);
@@ -80,12 +86,12 @@ function drawChart(data, title, xval){
   var smallest = d3.min(values, function(d) {return d || Infinity; })
 
 
-
   var color =  d3.scaleLinear()
   .domain([0,smallest, d3.max(values)])
   .range(['lightyellow', 'yellow', 'green']);
 
   var g = svg.append("g");
+
 
   // load and display the world and locations
   d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json", function(error, topology) {
@@ -94,6 +100,7 @@ function drawChart(data, title, xval){
     .enter()
     .append("path")
     .attr("d", path)
+
     .attr("fill","white")
     .transition()
     .duration(800)
@@ -119,8 +126,43 @@ function drawChart(data, title, xval){
       });
 
 
-    });
+values.unshift (Infinity)
+var legval = values.sort((a,b)=>b-a).
+filter( function(value, index, self) {
+    return self.indexOf(value) === index; });
 
+legval.unshift (Infinity)
+legval.unshift (Infinity)
+
+var legval = legval.
+    filter(function(value, index, self) {
+    return index % 3 == 0 ;
+});
+legval.push(0)
+
+var legend = svg
+.attr("class", "legend")
+.selectAll("g")
+.data(legval)
+.enter()
+.append("g")
+.attr("transform", function(d, i) { return "translate(0," + (height/2 + i * 17 )+ ")"; });
+
+legend.append("rect")
+.data(legval)
+
+.attr("width", 18)
+.attr("height", 18)
+.style("fill", color);
+
+legend.append("text")
+.data(legval)
+.attr("x", 24)
+.attr("y", 9)
+.attr("dy", ".35em")
+.text(function(d) { return format(d); });
+
+});
 
 
     // Prep the tooltip bits, initial display is hidden
