@@ -11,19 +11,19 @@
   <br>
   <label for="total">
       <input type="radio" id="total" name="reportType" onclick="drawtotal()"/>
-      Total Counts by Country
+      <span>Total Counts by Country </span>
   </label>
   <br>
   <br>
   <label for="avgprice">
       <input type="radio" id="avgprice" name="reportType" onclick="drawprice()" />
-      Avg Wine Price by Country
+      <span>Avg Wine Price by Country </span>
   </label>
   <br>
   <br>
   <label for="avgquality">
-      <input type="radio" id="avgquality" name="reportType" onclick="drawquality()" />
-      Avg Wine Quality by Country
+      <input type="radio" id="avgquality" name="reportType" onclick="drawquality()" checked />
+      <span>Avg Wine Quality by Country </span>
   </label>
   <br>
   <br>
@@ -37,7 +37,9 @@
 </body>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="countrycheck.js"></script>
-
+<script>
+drawquality();
+</script>
 <div class="citation">
 <img src="" alt="Background image courtesy: https://www.bayridgewine.com/wp-content/uploads/2018/03/white-wine-white-background.jpg" />
 <p>- photo by: https://www.bayridgewine.com/ , Bay Ridge Wine & Spirits, Annapolis</p>

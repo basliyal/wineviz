@@ -1,4 +1,4 @@
-var margin = {top: 30, right: 50, bottom: 70, left: 70},
+var margin = {top: 30, right: 50, bottom:110, left: 90},
 width = 1100 - margin.left - margin.right,
 height = 550 - margin.top - margin.bottom;
 
@@ -10,47 +10,61 @@ return !(number % 1) ? formatInteger(number) : formatDecimal(number)
 }
 var val = JSON.parse(window.localStorage.getItem('value'));
 
-
 function drawtotal(){
+  var all_count = 0;
+  var all_total = 0;
 var aggdata = d3.nest()
 .key(function(d) { return d[2]; })
-.rollup(function(v) { return v.length })
+.rollup(function(v) {
+  all_count += 1;
+  all_total += v.length
+  return v.length })
 .entries(val)
 .sort(function(a,b) {return d3.descending(a.value,b.value);})
-drawChart(aggdata, "Total Rating Counts by Country", "Total",  "#69b3a2");
+drawChart(aggdata, "Total Rating Counts by Country", "Total",  "#0099f7",(all_total/all_count));
 }
 
 
 
 function drawquality(){
+var all_count = 0;
+var all_total = 0;
 var qualityavg = d3.nest()
 .key(function(d) { return d[2]; })
 .rollup(function(v) {
   var count = v.length;
   var total = d3.sum(v, function(d) { return d[0] })
+  all_count += count;
+  all_total += total
   return total/count;
+
 })
 .entries(val)
 .sort(function(a,b) {return d3.descending(a.value,b.value);})
-drawChart(qualityavg,"Avg Wine Quality by Country", "Avg Quality Rating" , "#CC9900" );
+
+drawChart(qualityavg,"Avg Wine Quality by Country", "Avg Quality Rating" , "#9aaf73" ,(all_total/all_count));
 
 }
 
 function drawprice(){
+var all_count = 0;
+var all_total = 0;
 var priceavg = d3.nest()
 .key(function(d) { return d[2]; })
 .rollup(function(v) {
   var count = v.length;
   var total = d3.sum(v, function(d) { return d[1] })
+  all_count += count;
+  all_total += total
   return total/count;
 })
 .entries(val)
 .sort(function(a,b) {return d3.descending(a.value,b.value);})
-drawChart(priceavg, "Avg wine Price by Country", "Avg Price", "#883300");
+drawChart(priceavg, "Avg wine Price by Country", "Avg Price", "#A82B10", (all_total/all_count));
 }
 
 
-function drawChart(data, main, left, fill) {
+function drawChart(data, main, left, fill, avg) {
   d3.select("#graph").select("svg").remove();
   d3.select("#intro").remove();
 
@@ -74,12 +88,12 @@ function drawChart(data, main, left, fill) {
   .attr("transform", "translate(-10,0)rotate(-45)")
   .style("text-anchor", "end");
 
-  var smallest = (d3.min(data, function(d) {return d.value || Infinity; }) -1)
-
+   var smallest = (d3.min(data, function(d) {return d.value || Infinity; }) -1)
+  var max = d3.max(data, function(d) { return d.value;})
 
   // Add Y axis
   var y = d3.scaleLinear()
-  .domain([smallest, d3.max(data, function(d) { return d.value;})])
+  .domain([smallest, max+ 5 ])
   .range([ height, 0]);
   svg.append("g")
   .call(d3.axisLeft(y));
@@ -110,7 +124,11 @@ function drawChart(data, main, left, fill) {
     return value;
  })
   .delay(function(d,i){return(i*50)})
+  .style("fill-opacity", function(d) {
+      return (d.value < avg) ? 0.4 : 0.8 })
+
   .attr("fill", fill);
+
 
   svg.append("text")
   .attr("x", (width/2 ))
@@ -137,7 +155,25 @@ function drawChart(data, main, left, fill) {
         tooltip.style("top", (event.pageY) + "px")
       });
 
-      // Prep the tooltip bits, initial display is hidden
+
+      svg.append('line')
+          .style("stroke", "#030056")
+          .style("stroke-width", 1)
+          .style("stroke-dasharray", "1,5")
+          .attr("x1", 0)
+          .attr("y1", y(avg))
+          .attr("x2", width)
+          .attr("y2", y(avg));
+
+          svg.append("text")
+          .attr("x", (width/2 +30 ))
+          .attr("y", (y(avg) -10))
+          .style("fill", "#bb070e")
+
+          .attr("text-anchor", "middle")
+          .style("font-size", "18px")
+          .html("International average");
+
 
       var tooltip =  d3.select("#graph")
       .append("div")

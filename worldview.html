@@ -10,23 +10,27 @@
   <span> <b>Select the report type: </b></span>
   <br>
   <br>
-  <label for="total">
+  <label for="total"  class="btn">
       <input type="radio" id="total" name="reportType" onclick="drawtotal()"/>
-      Total review counts
+      <span>Total review counts </span>
+
   </label>
 
-  <label for="avgprice">
+  <label for="avgprice"  class="btn">
       <input type="radio" id="avgprice" name="reportType" onclick="drawprice()" />
-      Avg Wine Price
+      <span>Avg Wine Price </span>
+
   </label>
 
-  <label for="avgquality">
-      <input type="radio" id="avgquality" name="reportType" onclick="drawquality()" />
-      Avg Wine Quality
+  <label for="avgquality" class="btn">
+      <input type="radio" id="avgquality" name="reportType" onclick="drawquality()" checked/>
+      <span>Avg Wine Quality </span>
   </label>
   <br>
   <br>
 </div>
+
+
 <div  id="legend"> </div>
 <div  id="winemap"> </div>
 
@@ -40,7 +44,10 @@
 <script src="https://d3js.org/topojson.v0.min.js"></script>
 
 <script src="worldmap.js"></script>
+<script>
+drawquality();
 
+</script>
 <div class="citation">
 <img src="" alt="Background image courtesy: https://www.bayridgewine.com/wp-content/uploads/2018/03/white-wine-white-background.jpg" />
 <p>- photo by: https://www.bayridgewine.com/ , Bay Ridge Wine & Spirits, Annapolis</p>
