@@ -34,7 +34,7 @@ label input[type="radio"]:checked ~ span {
 
 .info {
   height: 200px;
-  width: 70%;
+  width: 1200px;
 }
 
 .nav {
@@ -44,7 +44,6 @@ label input[type="radio"]:checked ~ span {
 
 .plot{
   fill: #277D6E;
-  background-color: #F1F6F6;
 }
 
 h1 {
