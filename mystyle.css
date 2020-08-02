@@ -85,6 +85,9 @@ path {
   background-color: #5E1224;
   color: white;
   text-align: center;
+  font-size: 9px;
+  letter-spacing: 0.6px;
+  word-spacing: -1px;
 }
 
 a.button {
