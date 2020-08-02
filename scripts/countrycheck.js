@@ -163,7 +163,7 @@ function drawtotal(){
           .attr("y2", y(avg))
           .transition()
           .duration(2000)
-          .delay(48*50)
+          .delay(45*40)
           .style("stroke", "#030056")
           .style("stroke-width", 2)
           .style("stroke-dasharray", "1,5")
