@@ -6,9 +6,9 @@ function format(number){
 }
 
 // set the dimensions and margins of the graph
-var margin = {top: 30, right: 50, bottom: 70, left: 70},
-width = 400 - margin.left - margin.right,
-height = 400 - margin.top - margin.bottom;
+var margin = {top: 30, right: 50, bottom: 60, left: 70},
+width = 480 - margin.left - margin.right,
+height = 350 - margin.top - margin.bottom;
 
 
 function drawChart(dom, data, main, xax) {
@@ -85,7 +85,7 @@ function drawChart(dom, data, main, xax) {
 
   svg.append('line')
   .style("stroke", "darkorange")
-  .style("stroke-width", 3)
+  .style("stroke-width", 1)
   .style("stroke-dasharray", "5,5")
   .attr("x1", x(thresold))
   .attr("y1", y(0))
@@ -96,11 +96,10 @@ function drawChart(dom, data, main, xax) {
   svg.append('line')
   .style("stroke", "black")
   .style("stroke-width", 0.5)
-  .attr("x1", x(thresold)+20)
-  .attr("y1", height - 9.5 *margin.top)
-  .attr("x2", width - 2.6*margin.right)
-  .attr("y2", height -  9.5 *margin.top);
-
+  .attr("x1", x(thresold)+10)
+  .attr("y1", height - 8.5 *margin.top)
+  .attr("x2", width - 2.7*margin.right)
+  .attr("y2", height -  8.2 *margin.top);
 
   svg.append("text")
   .append('svg:tspan')
