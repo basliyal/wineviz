@@ -83,6 +83,24 @@ function drawChart(dom, data, main, xax) {
   .delay(function(d,i){return(i*80)})
 
 
+  svg.append('line')
+      .style("stroke", "darkorange")
+      .style("stroke-width", 3)
+      .style("stroke-dasharray", "5,5")
+      .attr("x1", x(thresold))
+      .attr("y1", y(0))
+      .attr("x2", x(thresold))
+      .attr("y2", y(data.length));
+
+
+      svg.append('line')
+          .style("stroke", "black")
+          .style("stroke-width", 0.5)
+          .attr("x1", x(thresold)+20)
+          .attr("y1", height - 9.5 *margin.top)
+          .attr("x2", width - 2.6*margin.right)
+          .attr("y2", height -  9.5 *margin.top);
+
 
   svg.append("text")
   .append('svg:tspan')
@@ -95,6 +113,7 @@ function drawChart(dom, data, main, xax) {
   .attr('dy', 20)
   .attr("text-anchor", "middle")
   .style("font-size", "18px")
+  .style("fill", "darkorange")
   .html("Mean Value: "+thresold);
 
 
