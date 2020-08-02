@@ -42,7 +42,8 @@ label input[type="radio"]:checked ~ span {
 .warning {
     background-color: #ffffcc;
     border-left: 10px solid #ffeb3b;
-    height: 30px
+    height: 30px;
+    width: 70%;
     text-align: center;
     font-size: 18px;
     padding: 10px;
