@@ -126,48 +126,46 @@ function drawChart(data, title, xval){
       });
 
 
-values.unshift (Infinity)
-var legval = values.sort((a,b)=>b-a).
-filter( function(value, index, self) {
-    return self.indexOf(value) === index; });
+      values.unshift (Infinity)
+      var legval = values.sort((a,b)=>b-a).
+      filter( function(value, index, self) {
+        return self.indexOf(value) === index; });
 
-legval.unshift (Infinity)
-legval.unshift (Infinity)
+        legval.unshift (Infinity)
+        legval.unshift (Infinity)
 
-var legval = legval.
-    filter(function(value, index, self) {
-    return index % 3 == 0 ;
-});
-legval.push(0)
+        var legval = legval.
+        filter(function(value, index, self) {
+          return index % 3 == 0 ;
+        });
+        legval.push(0)
 
-var legend = svg
-.attr("class", "legend")
-.selectAll("g")
-.data(legval)
-.enter()
-.append("g")
-.attr("transform", function(d, i) { return "translate(0," + (height/2 + i * 17 )+ ")"; });
+        var legend = svg
+        .attr("class", "legend")
+        .selectAll("g")
+        .data(legval)
+        .enter()
+        .append("g")
+        .attr("transform", function(d, i) { return "translate(0," + (height/2 + i * 17 )+ ")"; });
 
-legend.append("rect")
-.data(legval)
+        legend.append("rect")
+        .data(legval)
 
-.attr("width", 18)
-.attr("height", 18)
-.style("fill", color);
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", color);
 
-legend.append("text")
-.data(legval)
-.attr("x", 24)
-.attr("y", 9)
-.attr("dy", ".35em")
-.text(function(d) { return format(d); });
+        legend.append("text")
+        .data(legval)
+        .attr("x", 24)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .text(function(d) { return format(d); });
 
-});
+      });
 
 
-    // Prep the tooltip bits, initial display is hidden
-
-    var tooltip =  d3.select("#winemap")
-    .append("div")
-    .attr("class", "tooltip")
-  }
+      var tooltip =  d3.select("#winemap")
+      .append("div")
+      .attr("class", "tooltip")
+    }

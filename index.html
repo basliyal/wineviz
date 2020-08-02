@@ -8,15 +8,15 @@
   <div id="pageheader">
     <h1> Wine Rating & Pricing</h1>
   </div>
-  <div id = "introduction">
-    <p>A wine rating system is a numeric value on a scale of 100 points provided to
-      a wine by set of critics. The method is considered <br>flawed by many since it
+  <div id = "introduction" class=info>
+    <p>A wine rating system is a numeric value on a scale of 100 points provided
+      to  a wine by set of critics. The method is considered flawed by many since it
       doesn't hold any scientific measuement and dependent of individual critics
-      choices and their taste prefernces. <br>However, The 100 point system is unified worldwide
-      used and has become a goto method for people to decide on wine tasting <br>and buying. </p>
+      choices and their taste prefernces. However, The 100 point system is unified worldwide
+      used and has become a goto method for people to decide on wine tasting and buying. </p>
 
       <p> This visualization will help us understand how the Wine rating system works for
-        different wines and how different region <br>fairs in the rating system. </p>
+        different wines and how different region fairs in the rating system. </p>
 
         <p>The 100 points scale actually starts at 50 and describe each range as below: </p>
 
@@ -30,56 +30,56 @@
         <br/>
       </div>
 
-      <div style="width: 500px; float: left;" id="ratingcurve"> </div>
-      <div style="margin-left: 510px;" id="pricecurve">  </div>
-    <br>
-  <a href="countrycheck.html" class="button">Check Countrywise reports</a>
-  <br>
-  <div>
-    <br>
-    in Above graphs we can see while Wine Quality follows a normal distribution wine prices graphs decline
-    sharply towards higher price. This indicates while <b>most wines are avg in quality </b> and have
-       equal distribution for higher and lower quality of wines.
-       Whereas, price-wise <b> most wines are cheaper <b> and we find low number of wines in higher price range.
+      <div style="width: 500px; float: left;" id="ratingcurve" class="plot"> </div>
+      <div style="margin-left: 510px; width: 500px;"id="pricecurve" class="plot">  </div>
+      <br>
+      <a href="countrycheck.html" class="button">Check Countrywise reports</a>
+      <br>
+      <div class="info">
+        <p>
+          in Above graphs we can see while Wine Quality follows a normal distribution wine prices graphs decline
+          sharply towards higher price. This indicates while <b>most wines are avg in quality </b> and have
+          equal distribution for higher and lower quality of wines.
+          Whereas, price-wise <b> most wines are cheaper <b> and we find low number of wines in higher price range.
+          </p>
+          <p>
+
+            in Next slides, we will focus on global quality distribution and wine price distributions.
+          </p>
+        </div>
+      </body>
+      <script src="https://d3js.org/d3.v5.min.js"></script>
+      <script src="winerate.js"></script>
+      <script>
+      // first promise returns the dataset
+      const dataset = d3.csv("https://raw.githubusercontent.com/basliyal/wineviz/master/winemag-data_first150k.csv")
+      .then(function(data){
+        return data;
+      });
+      //this promise returns an array with lattitude and longitude
+      const values = dataset.then(function(value) {
+        return Promise.all(value.map(function(d){
+          return [d.points, d.price,d.country];
+        }))});
+        //print the array
+        values.then(function(value) {
+          window.localStorage.setItem('value', JSON.stringify(value));
+        });
+
+        var val = JSON.parse(window.localStorage.getItem('value'));
+
+        drawChart("#ratingcurve",val.map(function(d){ return parseInt(d[0]); }),
+        "Wine Rating Curve", "Wine Points");
+
+        drawChart("#pricecurve",val.map(function(d){ return parseInt(d[1]); }),
+        "Wine Price chart", "Price per bottle");
 
 
-    in Next slides, we will focus on global quality distribution and wine price distributions.
-  </div>
-</body>
-<script src="https://d3js.org/d3.v5.min.js"></script>
-<script src="winerate.js"></script>
-<script>
-// first promise returns the dataset
-const dataset = d3.csv("https://raw.githubusercontent.com/basliyal/wineviz/master/winemag-data_first150k.csv")
-.then(function(data){
-  return data;
-});
-//this promise returns an array with lattitude and longitude
-const values = dataset.then(function(value) {
-  return Promise.all(value.map(function(d){
-    return [d.points, d.price,d.country];
-  }))});
-  //print the array
-  values.then(function(value) {
-    window.localStorage.setItem('value', JSON.stringify(value));
-  });
+      </script>
 
-  var val = JSON.parse(window.localStorage.getItem('value'));
+      <div class="citation">
+        <p>- Background image by: Bay Ridge Wine & Spirits, Annapolis :  https://www.bayridgewine.com/wp-content/uploads/2018/03/white-wine-white-background.jpg </p>
+        <p>- data courtesy: Kaggle datasoruce, https://www.kaggle.com/zynicide/wine-reviews , </p>
+      </div>
 
-  drawChart("#ratingcurve",val.map(function(d){ return parseInt(d[0]); }),
-  "Wine Rating Curve", "Wine Points");
-
-  drawChart("#pricecurve",val.map(function(d){ return parseInt(d[1]); }),
-  "Wine Price chart", "Price per bottle");
-
-
-</script>
-
-<div class="citation">
-<img src="" alt="Background image courtesy: https://www.bayridgewine.com/wp-content/uploads/2018/03/white-wine-white-background.jpg" />
-<p>- photo by: https://www.bayridgewine.com/ , Bay Ridge Wine & Spirits, Annapolis</p>
-<p>- data courtesy to: https://www.kaggle.com/zynicide/wine-reviews , Kaggle datasoruce</p>
-
-</div>
-
-</html>
+      </html>

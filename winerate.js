@@ -2,7 +2,7 @@ var formatInteger = d3.format(",");
 var formatDecimal = d3.format(",.2f");
 
 function format(number){
-return !(number % 1) ? formatInteger(number) : formatDecimal(number)
+  return !(number % 1) ? formatInteger(number) : formatDecimal(number)
 }
 
 // set the dimensions and margins of the graph
@@ -84,22 +84,22 @@ function drawChart(dom, data, main, xax) {
 
 
   svg.append('line')
-      .style("stroke", "darkorange")
-      .style("stroke-width", 3)
-      .style("stroke-dasharray", "5,5")
-      .attr("x1", x(thresold))
-      .attr("y1", y(0))
-      .attr("x2", x(thresold))
-      .attr("y2", y(data.length));
+  .style("stroke", "darkorange")
+  .style("stroke-width", 3)
+  .style("stroke-dasharray", "5,5")
+  .attr("x1", x(thresold))
+  .attr("y1", y(0))
+  .attr("x2", x(thresold))
+  .attr("y2", y(data.length));
 
 
-      svg.append('line')
-          .style("stroke", "black")
-          .style("stroke-width", 0.5)
-          .attr("x1", x(thresold)+20)
-          .attr("y1", height - 9.5 *margin.top)
-          .attr("x2", width - 2.6*margin.right)
-          .attr("y2", height -  9.5 *margin.top);
+  svg.append('line')
+  .style("stroke", "black")
+  .style("stroke-width", 0.5)
+  .attr("x1", x(thresold)+20)
+  .attr("y1", height - 9.5 *margin.top)
+  .attr("x2", width - 2.6*margin.right)
+  .attr("y2", height -  9.5 *margin.top);
 
 
   svg.append("text")
@@ -144,18 +144,15 @@ function drawChart(dom, data, main, xax) {
         tooltip.style("top", (event.pageY) + "px")
       });
 
-      // Prep the tooltip bits, initial display is hidden
-
+      
       var tooltip =  d3.select(dom)
       .append("div")
       .attr("class", "tooltip")
 
-
-// Adding Legends
       svg.append("circle").attr("cx",300).attr("cy",130).attr("r", 6).style("fill", "#69b3a2")
       svg.append("circle").attr("cx",300).attr("cy",160).attr("r", 6).style("fill", "#404080")
       svg.append("text").attr("x", 320).attr("y", 130).text("Above Avg.").style("font-size", "15px").attr("alignment-baseline","middle")
       svg.append("text").attr("x", 320).attr("y", 160).text("Below Avg.").style("font-size", "15px").attr("alignment-baseline","middle")
 
 
-}
+    }

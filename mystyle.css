@@ -11,11 +11,12 @@ body {
   text-decoration: none;
   font-style: normal;
   text-transform: none;
+  text-align: justify;
+
 }
 
 #radio{
-
-  font-size: 18px;
+  font-size: 15px;
   letter-spacing: 0.6px;
   word-spacing: -1px;
   color: #998024;
@@ -23,38 +24,33 @@ body {
   text-decoration: none;
   font-style: normal;
   text-transform: none;
+}
 
+label input[type="radio"]:checked ~ span {
+  color: #F1F6F6;
+  background-color:#998024;
+}
+
+
+.info {
+  height: 200px;
+  width: 70%;
+}
+
+.nav {
+  height: 50px;
+  width: 70%;
 }
 
 .plot{
   fill: #277D6E;
+  background-color: #F1F6F6;
 }
-
-#ratingcurve{
-  fill: #277D6E;
-}
-
-#pricecurve{
-  fill: #277D6E;
-}
-
-
-#total{
-  fill: #277D6E;
-}
-
-#avgquality{
-  fill: #277D6E;
-}
-
-#avgprice{
-  fill: #277D6E;
-}
-
 
 h1 {
   color: coral;
 }
+
 .axis path,
 .axis line {
   fill: none;
@@ -116,10 +112,7 @@ div.tooltip {
   padding: 3px;
 }
 
-label input[type="radio"]:checked ~ span {
-  color: #030056;
-  background-color:#ded2f2;
-}
+
 
 .custom-select select {
   background-color: #0099f7;

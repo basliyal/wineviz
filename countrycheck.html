@@ -5,34 +5,47 @@
   <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 <body>
-<div id ="radio" >
-  <span> <b>Select the report type? </b></span>
-  <br>
-  <br>
-  <label for="total">
+  <div id ="radio" >
+    <span> <b>Select the report type? </b></span>
+    <br>
+    <br>
+    <label for="total">
       <input type="radio" id="total" name="reportType" onclick="drawtotal()"/>
       <span>Total Counts by Country </span>
-  </label>
-  <br>
-  <br>
-  <label for="avgprice">
+    </label>
+    <br>
+    <br>
+    <label for="avgprice">
       <input type="radio" id="avgprice" name="reportType" onclick="drawprice()" />
       <span>Avg Wine Price by Country </span>
-  </label>
-  <br>
-  <br>
-  <label for="avgquality">
+    </label>
+    <br>
+    <br>
+    <label for="avgquality">
       <input type="radio" id="avgquality" name="reportType" onclick="drawquality()" checked />
       <span>Avg Wine Quality by Country </span>
-  </label>
-  <br>
-  <br>
-</div>
-  <div  id="graph"> </div>
+    </label>
+    <br>
+    <br>
+  </div>
+  <div  id="graph" class="plot" style="width: 60%;"> </div>
 
-</br>
-<a href="index.html" class="backbutton">Go Back</a>
-<a href="worldview.html" class="button">View the data on the world Map</a>
+  <div class ="nav">
+    <a href="index.html" class="backbutton">Go Back</a>
+    <a href="worldview.html" class="button">View the data on the world Map</a>
+
+  </div>
+
+  <div class="info">
+    <p> As these 3 graphs shows data is highly biased toward top 8 Countries,
+      which provides more than 90% of data in our dataset. We have 47 different countries.
+      United States of America provides highest number of wines in our dataset.
+      Best wines in our dataset comes from Unied Kingdom and Hungary has costliest wines according to our dataset.
+    </p><p>
+      12 out of 47 countries from our dataset have better than internation average wines.
+      While 9 out of 47 countries has wine prices higher than avg International prices.
+    </p>
+  </div>
 
 </body>
 <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -41,9 +54,8 @@
 drawquality();
 </script>
 <div class="citation">
-<img src="" alt="Background image courtesy: https://www.bayridgewine.com/wp-content/uploads/2018/03/white-wine-white-background.jpg" />
-<p>- photo by: https://www.bayridgewine.com/ , Bay Ridge Wine & Spirits, Annapolis</p>
-<p>- data courtesy to: https://www.kaggle.com/zynicide/wine-reviews , Kaggle datasoruce</p>
-
+  <p>- Background image by: Bay Ridge Wine & Spirits, Annapolis :  https://www.bayridgewine.com/wp-content/uploads/2018/03/white-wine-white-background.jpg </p>
+  <p>- data courtesy: Kaggle datasoruce, https://www.kaggle.com/zynicide/wine-reviews , </p>
 </div>
+
 </html>
