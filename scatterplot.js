@@ -1,5 +1,5 @@
 var margin = {top: 30, right: 50, bottom: 70, left: 70},
-width = 1100 - margin.left - margin.right,
+width = 850 - margin.left - margin.right,
 height = 550 - margin.top - margin.bottom;
 
 var formatInteger = d3.format(",");

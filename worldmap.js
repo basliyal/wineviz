@@ -1,4 +1,4 @@
-var width = 1200,
+var width = 1050,
 height = 600;
 
 function onlyUnique(value, index, self) {

@@ -7,7 +7,7 @@ function format(number){
 
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 50, bottom: 70, left: 70},
-width = 500 - margin.left - margin.right,
+width = 400 - margin.left - margin.right,
 height = 400 - margin.top - margin.bottom;
 
 
@@ -144,7 +144,7 @@ function drawChart(dom, data, main, xax) {
         tooltip.style("top", (event.pageY) + "px")
       });
 
-      
+
       var tooltip =  d3.select(dom)
       .append("div")
       .attr("class", "tooltip")
