@@ -157,22 +157,35 @@ function drawtotal(){
 
 
           svg.append('line')
+          .attr("x1", 0)
+          .attr("y1", y(avg))
+          .attr("x2", 0)
+          .attr("y2", y(avg))
+          .transition()
+          .duration(2000)
+          .delay(48*50)
           .style("stroke", "#030056")
-          .style("stroke-width", 1)
+          .style("stroke-width", 2)
           .style("stroke-dasharray", "1,5")
           .attr("x1", 0)
           .attr("y1", y(avg))
           .attr("x2", width)
-          .attr("y2", y(avg));
+          .attr("y2", y(avg))
 
           svg.append("text")
           .attr("x", (width/2 +30 ))
           .attr("y", (y(avg) -10))
-          .style("fill", "#bb070e")
 
           .attr("text-anchor", "middle")
           .style("font-size", "18px")
-          .html("International average");
+          .html("International average")
+
+          .style("fill", "white")
+          .transition()
+          .duration(4000)
+          .delay(48*50)
+          .style("fill", "#bb070e")
+
 
 
           var tooltip =  d3.select("#graph")
