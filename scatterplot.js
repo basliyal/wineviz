@@ -13,6 +13,7 @@ return !(number % 1) ? formatInteger(number) : formatDecimal(number)
 function scheduleA(event) {
   var val = JSON.parse(window.localStorage.getItem('value'));
   var sel = document.getElementById('countryList');
+  console.log(sel.value );
   var aggdata=val.filter(function(d) { return d[2] === sel.value  })
   drawChart(aggdata);
 }
@@ -31,14 +32,6 @@ function drawChart(data) {
   var xdata = data.map(function(d){ return parseInt(d[0])});
   var ydata = data.map(function(d){ return parseInt(d[1])});
 
-console.log ("x")
-  console.log(d3.min(xdata, function(d) {return d }))
-  console.log(d3.max(xdata, function(d) {return d }))
-  console.log ("y")
-
-  console.log(d3.min(ydata, function(d) {return d }))
-  console.log(d3.max(ydata, function(d) {return d }))
-
 
   var x = d3.scaleLinear()
   .domain([d3.min(xdata, function(d) {return d }), d3.max(xdata, function(d) {return d })])
@@ -53,15 +46,25 @@ console.log ("x")
   .text("Wine Quality");
 
 
-var smallest = d3.min(ydata, function(d) {return d || 0});
+  var smallest = d3.min(ydata, function(d) {return d || 0});
+  var max = d3.max(ydata, function(d) {return d}) || 0;
+
+// taking care of missing values
+mean = d3.mean(ydata) || 0
+ydata = Array.from(ydata, item => item || mean);
 
 
   // Add Y axis
   var y = d3.scaleLinear()
-  .domain([smallest, d3.max(ydata, function(d) { return d})])
+  .domain([smallest, (max+30)])
   .range([ height, 0]);
   svg.append("g")
   .call(d3.axisLeft(y));
+
+
+  var scale = d3.scaleLog()
+      .domain([1, 151000])
+      .range([10, 3]);
 
   // text label for the y axis
   svg.append("text")
@@ -72,6 +75,10 @@ var smallest = d3.min(ydata, function(d) {return d || 0});
   .style("font-size", "13px")
   .text("Wine Price");
 
+  console.log(data.length)
+
+  console.log(scale.invert(data.length))
+  console.log(scale(data.length))
   // Add dots
     svg.append('g')
       .selectAll("dot")
@@ -80,7 +87,7 @@ var smallest = d3.min(ydata, function(d) {return d || 0});
       .append("circle")
         .attr("cx", function (d) {return x(d[0]); } )
         .attr("cy", function (d) {return y(d[1]); } )
-        .attr("r", 3)
+        .attr("r", scale(data.length))
         .style("fill", "#69b3a2")
 
 
@@ -102,6 +109,47 @@ var smallest = d3.min(ydata, function(d) {return d || 0});
         tooltip.style("left", (event.pageX) + "px")
         tooltip.style("top", (event.pageY) + "px")
       });
+
+
+      svg.append("circle")
+        .attr("cx", function (d) {return x(d3.mean(xdata)); } )
+        .attr("cy", function (d) {return y(d3.mean(ydata)); } )
+        .attr("r", 20)
+        .style("fill-opacity", 0.2)
+        .style("fill", "purple")
+
+        var text_x = (x(d3.mean(xdata)) -  4*margin.right);
+        var text_y = (y(d3.mean(ydata)) -  5*margin.top);
+
+
+        svg.append("text")
+        .attr("x", text_x)
+        .attr("y", text_y)
+        .attr("text-anchor", "middle")
+        .style("font-size", "15px")
+        .style("fill", "darkorange")
+
+        .html("Avg Price/Quality point")
+
+        var lineFunction = d3.line()
+          .x(function(d) { return d.x; })
+          .y(function(d) { return d.y; })
+          .curve(d3.curveLinear);
+
+
+        var lineData = [
+          { "x": (x(d3.mean(xdata)) -  4*margin.right ),   "y": (y(d3.mean(ydata)) -  5*margin.top + 2)},
+          { "x": (x(d3.mean(xdata)) -  3.5*margin.right ),  "y": (y(d3.mean(ydata)) -  3*margin.top )},
+          { "x": x(d3.mean(xdata)), "y": y(d3.mean(ydata))}
+        ];
+
+        //The line SVG Path we draw
+        var lineGraph = svg.append("path")
+          .attr("d", lineFunction(lineData))
+          .attr("stroke", "blue")
+          .attr("stroke-width", 2)
+          .attr("fill", "none");
+
 
       // Prep the tooltip bits, initial display is hidden
 
