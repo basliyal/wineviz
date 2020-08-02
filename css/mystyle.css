@@ -39,7 +39,15 @@ label input[type="radio"]:checked ~ span {
   background-color:#998024;
 }
 
+.warning {
+    background-color: #ffffcc;
+    border-left: 10px solid #ffeb3b;
+    height: 30px
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
 
+}
 .info {
   height: 150px;
   width: 96%;

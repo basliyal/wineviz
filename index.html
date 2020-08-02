@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <title></title>
-  <link rel="stylesheet" type="text/css" href="mystyle.css">
+  <link rel="stylesheet" type="text/css" href="css/mystyle.css">
 </head>
 <body>
   <div id="pageheader" class="header">
@@ -11,15 +11,15 @@
 
   <div id = "introduction" class=info>
     <p>A wine rating system is a numeric value on a scale of 100 points provided
-      to  a wine by set of critics. The method is considered flawed by many since it <br>
-      doesn't hold any scientific measuement and dependent of individual critics
-      choices and their taste prefernces. However, The 100 point system is unified <br>worldwide
-      used and has become a goto method for people to decide on wine tasting and buying. </p>
+      to a wine by set of critics. The method is considered flawed by many since it <br>
+      doesn't hold any scientific measurement and dependent of individual critics
+      choices and their taste preferences. However, the 100-point system is unified <br>worldwide
+      used and has become a go to method for people to decide on wine tasting and buying. </p>
 
       <p> This visualization will help us understand how the Wine rating system works for
         different wines and how different region fairs in the rating system. </p>
 
-        <p>The 100 points scale actually starts at 50 and describe each range as below: </p>
+        <p>The 100 points scale starts at 50 and describe each range as below: </p>
       </div>
 
         <div id = "list" class=info>
@@ -44,7 +44,7 @@
           in Above graphs we can see while Wine Quality follows a normal distribution wine prices graphs decline
           sharply towards higher price. This indicates while <br><b>most wines are avg in quality </b> and have
           equal distribution for higher and lower quality of wines.
-          Whereas, price-wise <b> most wines are cheaper <b> and we find <br>low number of wines in higher price range.
+          Whereas, pricewise <b> most wines are cheaper <b> and we find <br>low number of wines in higher price range.
           </p>
           <p>
 
@@ -53,7 +53,7 @@
         </div>
       </body>
       <script src="https://d3js.org/d3.v5.min.js"></script>
-      <script src="winerate.js"></script>
+      <script src="scripts/winerate.js"></script>
       <script>
       // first promise returns the dataset
       const dataset = d3.csv("https://raw.githubusercontent.com/basliyal/wineviz/master/winemag-data_first150k.csv")
@@ -82,8 +82,8 @@
       </script>
 
       <div class="citation">
-        <p>- Background image by: Bay Ridge Wine & Spirits, Annapolis :  https://www.bayridgewine.com/wp-content/uploads/2018/03/white-wine-white-background.jpg </p>
-        <p>- data courtesy: Kaggle datasoruce, https://www.kaggle.com/zynicide/wine-reviews , </p>
+        <p>- Background image by: Bay Ridge Wine & Spirits, Annapolis:  https://www.bayridgewine.com/wp-content/uploads/2018/03/white-wine-white-background.jpg </p>
+        <p>- data courtesy: Kaggle data source, https://www.kaggle.com/zynicide/wine-reviews </p>
       </div>
 
       </html>

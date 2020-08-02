@@ -2,12 +2,11 @@
 <head>
   <meta charset="utf-8">
   <title></title>
-  <link rel="stylesheet" type="text/css" href="mystyle.css">
+  <link rel="stylesheet" type="text/css" href="css/mystyle.css">
 </head>
 
 <body>
   <div class="custom-select" style="width:200px;">
-
     <select id='countryList' onchange="scheduleA.call(this, event)">
       <option> The World</option>
     </select>
@@ -17,31 +16,32 @@
     <a href="worldview.html" class="backbutton">Go Back</a>
     <a href="index.html" class="button">Start Over</a>
   </div>
+
   <div class="info">
-    <b> Please wait as plot on this page takes time to load.</b>
     <p> The graph here shows, how relationship between wine quality and wine prices looks for every country and for the entire dataset.
       with help of annotation, <br>we can see a point which satisfy the avg wine quality and price point from dataset.
       As it shows for wine Quality while the avg point<br> is somewhere in middle, for wine prices its close to x -axis.
 
-    </p><p> This scatterplot reiterate our analysis from first slide that,
+    </p><p> This scatterplot reiterates our analysis from first slide that,
       while most wines are around avg quality a large part of wines in our dataset are on cheaper side.
     </p>
     <p>
-      Please feel free to explore individual countries from dropdown and check how their
-      price and quality distribution fairs in comparision to avg price/quality <br> point and how it changes with  respect to other countries.
+      Please feel free to explore individual countries from dropdown and check how them
+      price and quality distribution fairs in comparison to avg price/quality <br> point and how it changes with respect to other countries.
     </p>
   </div>
 
+  <div class="warning"><b> Please wait as plot on this page takes time to load. </b> </div>
 
 </body>
 <script src="https://d3js.org/d3.v5.min.js"></script>
-<script src="scatterplot.js"></script>
+<script src="scripts/scatterplot.js"></script>
 <script>
 var val = JSON.parse(window.localStorage.getItem('value'));
 
 var countryItems = document.getElementById("countryList");
 
-var countryList = val.map(function(d){ return d[2]}).filter( function(value, index, self) {
+var countryList = val.map(function(d){return d[2]}).filter( function(value, index, self) {
   return self.indexOf(value) === index; }).sort();
 
   for (var i = 0; i < countryList.length; i++) {
@@ -56,8 +56,8 @@ var countryList = val.map(function(d){ return d[2]}).filter( function(value, ind
 </script>
 
 <div class="citation">
-  <p>- Background image by: Bay Ridge Wine & Spirits, Annapolis :  https://www.bayridgewine.com/wp-content/uploads/2018/03/white-wine-white-background.jpg </p>
-  <p>- data courtesy: Kaggle datasoruce, https://www.kaggle.com/zynicide/wine-reviews , </p>
+  <p>- Background image by: Bay Ridge Wine & Spirits, Annapolis:  https://www.bayridgewine.com/wp-content/uploads/2018/03/white-wine-white-background.jpg </p>
+  <p>- data courtesy: Kaggle data source, https://www.kaggle.com/zynicide/wine-reviews </p>
 </div>
 
 </div>
